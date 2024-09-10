@@ -1,4 +1,4 @@
-package com.springboot.betterreads_app;
+package com.springboot.betterreads_app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -6,5 +6,34 @@ spring:
       client:
         registration:
           github:
-            client-id: <clientID>
-            client-secret: <clientSecret>
+            client-id: <client-id>
+            client-secret: <client-secret>
+  data:
+    cassandra:
+      keyspace-name: main
+      username: <username>
+      password: <password>
+      schema-action: create-if-not-exists
+      request:
+        timeout: 10s
+      connection:
+        connect-timeout: 10s
+        init-query-timeout: 10s
+  main:
+    allow-circular-references: true
+
+datastax.astra:
+  secure-connect-bundle: src/main/resources/secure-connect.zip
+
+datadump:
+  location:
+    author: /Users/akshitkhatri/Documents/github-projects/betterreads-data-loader/test-authors.txt
+    works: /Users/akshitkhatri/Documents/github-projects/betterreads-data-loader/test-works.txt
+
+astra:
+  db:
+    id: <id>
+    region: asia-south1
+    keyspace: main
+    application:
+      token: <token>
