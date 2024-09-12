@@ -15,12 +15,20 @@ import java.util.Optional;
 public class BookController {
 
     private final BookRepository bookRepository;
+    private final String COVER_IMAGE_ROOT = "http://covers.openlibrary.org/b/id/";
 
     @GetMapping(value = "/book/{bookId}")
     public String getBook(@PathVariable String bookId, Model model) {
         Optional<Book> optionalBook = bookRepository.findById(bookId);
         if (optionalBook.isPresent()) {
             Book book = optionalBook.get();
+            String imageUrl;
+            if (null != book.getCoverIds() && !book.getCoverIds().isEmpty()) {
+                imageUrl = COVER_IMAGE_ROOT + book.getCoverIds().get(0) + "-L.jpg";
+            } else {
+                imageUrl = "/src/resources/images/no-image.png";
+            }
+            model.addAttribute("coverImage", imageUrl);
             model.addAttribute("book", book);
             return "book";
         }

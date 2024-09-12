@@ -15,8 +15,8 @@ public class SecurityAdaptor  {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(a -> a
-                        .requestMatchers("/", "/error").permitAll()
-                        .anyRequest().authenticated()
+                        //.requestMatchers("/", "/error").permitAll()
+                        .anyRequest().permitAll()
                 )
                 .exceptionHandling(e -> e
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
