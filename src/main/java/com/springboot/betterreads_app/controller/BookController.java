@@ -26,7 +26,7 @@ public class BookController {
             if (null != book.getCoverIds() && !book.getCoverIds().isEmpty()) {
                 imageUrl = COVER_IMAGE_ROOT + book.getCoverIds().get(0) + "-L.jpg";
             } else {
-                imageUrl = "/src/resources/images/no-image.png";
+                imageUrl = "/images/no-image.png";
             }
             model.addAttribute("coverImage", imageUrl);
             model.addAttribute("book", book);
