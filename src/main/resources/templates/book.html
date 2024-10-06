@@ -43,6 +43,37 @@
                         <p class="card-text display-6" th:text="${book.authorNames}">Author name</p>
                         <p class="card-text" th:text="${book.description}">Book description</p>
                         <p class="card-text">Published Date: <small class="text-muted" th:text="${book.publishedDate}">2020-01-01</small></p>
+
+                        <form th:if="${loginId}" th:attr="action=@{/addUserBook}" method="POST">
+                            <div class="mb-3">
+                                <label for="startDate" class="form-label">Start Date</label>
+                                <input type="date" class="form-control" id="startDate">
+                            </div>
+                            <div class="mb-3">
+                                <label for="completedDate" class="form-label">Completed Date</label>
+                                <input type="date" class="form-control" id="completedDate">
+                            </div>
+                            <div class="mb-3">
+                                <label for="status" class="form-label">Status</label>
+                                <select id = "status" class="form-select" aria-label="reading status">
+                                    <option selected value="0">Status</option>
+                                    <option value="reading">Currently Reading</option>
+                                    <option value="finished">Finished</option>
+                                    <option value="dnf">Did not Finish</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="rating" class="form-label">Status</label>
+                                <select id = "rating" class="form-select" aria-label="Rating">
+                                    <option selected value="0">Select Rating</option>
+                                    <option value="1">&#9733</option>
+                                    <option value="2">&#9733;&#9733</option>
+                                    <option value="3">&#9733;&#9733;&#9733</option>
+                                    <option value="4">&#9733;&#9733;&#9733;&#9733</option>
+                                    <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733</option>
+                                </select>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
