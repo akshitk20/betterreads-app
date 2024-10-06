@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class UserBooksController {
 
-    @PostMapping("/addUserBook")
-    public String addBookForUser(@AuthenticationPrincipal OAuth2User principal) {
-
-    }
+//    @PostMapping("/addUserBook")
+//    public String addBookForUser(@AuthenticationPrincipal OAuth2User principal) {
+//
+//    }
 }
