@@ -46,6 +46,7 @@
 
                         <form th:if="${loginId}" th:attr="action=@{/addUserBook}" method="POST">
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <input type="hidden" name="bookId" th:value="${book.id}" />
                             <div class="mb-3">
                                 <label for="startDate" class="form-label">Start Date</label>
                                 <input type="date" class="form-control" id="startDate" name="startDate">
