@@ -1,7 +1,10 @@
 package com.springboot.betterreads_app.controller;
 
 import com.springboot.betterreads_app.model.book.Book;
+import com.springboot.betterreads_app.model.userbooks.UserBooks;
+import com.springboot.betterreads_app.model.userbooks.UserBooksPrimaryKey;
 import com.springboot.betterreads_app.repository.book.BookRepository;
+import com.springboot.betterreads_app.repository.userbooks.UserBooksRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -17,6 +20,8 @@ import java.util.Optional;
 public class BookController {
 
     private final BookRepository bookRepository;
+
+    private final UserBooksRepository userBooksRepository;
     private final String COVER_IMAGE_ROOT = "http://covers.openlibrary.org/b/id/";
 
     @GetMapping(value = "/book/{bookId}")
@@ -35,6 +40,15 @@ public class BookController {
 
             if (principal != null && principal.getAttribute("login") != null) {
                 model.addAttribute("loginId", principal.getAttribute("login"));
+                UserBooksPrimaryKey key = new UserBooksPrimaryKey();
+                key.setUserId(principal.getAttribute("login"));
+                key.setBookId(bookId);
+                Optional<UserBooks> userBooks = userBooksRepository.findById(key);
+                if (userBooks.isPresent()) {
+                    model.addAttribute("userBooks", userBooks.get());
+                } else {
+                    model.addAttribute("userBooks", new UserBooks());
+                }
             }
 
             return "book";

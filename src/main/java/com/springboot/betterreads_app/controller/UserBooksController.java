@@ -34,12 +34,13 @@ public class UserBooksController {
         key.setUserId(principal.getAttribute("login"));
         String bookId = formData.getFirst("bookId");
         key.setBookId(bookId);
+        userBooks.setKey(key);
         userBooks.setStartedDate(LocalDate.parse(Objects.requireNonNull(formData.getFirst("startDate"))));
         userBooks.setCompletedDate(LocalDate.parse(Objects.requireNonNull(formData.getFirst("completedDate"))));
         userBooks.setRating(Integer.parseInt(Objects.requireNonNull(formData.getFirst("rating"))));
-        userBooks.setReadingStatus(formData.getFirst("status"));
+        userBooks.setReadingStatus(formData.getFirst("readingStatus"));
 
         userBooksRepository.save(userBooks);
-        return new ModelAndView("redirect:/books/" + bookId);
+        return new ModelAndView("redirect:/book/" + bookId);
     }
 }
