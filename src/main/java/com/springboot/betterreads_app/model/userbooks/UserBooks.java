@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
-import org.springframework.data.cassandra.core.mapping.CassandraType;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
-import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.cassandra.core.mapping.*;
 
 import java.time.LocalDate;
 
@@ -15,12 +12,9 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 public class UserBooks {
-    @Id
-    @PrimaryKeyColumn(name = "user_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
-    private String userId;
-    @Id
-    @PrimaryKeyColumn(name = "book_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
-    private String bookId;
+
+    @PrimaryKey
+    private UserBooksPrimaryKey key;
 
     @Column("reading_status")
     @CassandraType(type = CassandraType.Name.TEXT)
