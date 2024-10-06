@@ -9,7 +9,7 @@ import org.springframework.data.cassandra.core.mapping.Table;
 
 import java.time.LocalDate;
 
-@Table(value = "book_by_user_and_bookid")
+@Table("book_by_user_and_bookid")
 @Data
 @NoArgsConstructor
 public class UserBooks {
@@ -28,6 +28,7 @@ public class UserBooks {
     @Column("completed_date")
     @CassandraType(type = CassandraType.Name.DATE)
     private LocalDate completedDate;
+
     @Column("rating")
     @CassandraType(type = CassandraType.Name.INT)
     private int rating;
