@@ -1,7 +1,7 @@
 package com.springboot.betterreads_app.model.user;
 
+import com.datastax.oss.driver.api.core.uuid.Uuids;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.cassandra.core.cql.Ordering;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
@@ -15,7 +15,6 @@ import java.util.UUID;
 
 @Table(value = "books_by_user")
 @Data
-@NoArgsConstructor
 public class BooksByUser {
     @PrimaryKeyColumn(name = "user_id", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private String id;
@@ -26,10 +25,12 @@ public class BooksByUser {
 
     @PrimaryKeyColumn(type = PrimaryKeyType.CLUSTERED, ordering = Ordering.DESCENDING)
     @CassandraType(type = CassandraType.Name.TIMEUUID)
+    @Column("time_uuid")
     private UUID timeUuid;
 
     @PrimaryKeyColumn(type = PrimaryKeyType.CLUSTERED, ordering = Ordering.ASCENDING)
     @CassandraType(type = CassandraType.Name.TEXT)
+    @Column("reading_status")
     private String readingStatus;
 
     @Column("book_name")
@@ -50,4 +51,8 @@ public class BooksByUser {
 
     @Transient
     private String coverUrl;
+
+    public BooksByUser() {
+        this.timeUuid = Uuids.timeBased();
+    }
 }
