@@ -40,7 +40,7 @@ public class UserBooksController {
         System.out.println(principal);
         String bookId = formData.getFirst("bookId");
         Optional<Book> optionalBook = bookRepository.findById(bookId);
-        if (!optionalBook.isPresent()) {
+        if (optionalBook.isEmpty()) {
             return new ModelAndView("redirect:/");
         }
         Book book = optionalBook.get();
